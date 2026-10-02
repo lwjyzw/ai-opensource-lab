@@ -1,0 +1,6 @@
+type: item
+name: Lab Crystal
+description: "A shimmering crystal grown in the ai-opensource-lab. Ammo for our future custom turret."
+color: "8cf2e4"
+cost: 3
+hardness: 2

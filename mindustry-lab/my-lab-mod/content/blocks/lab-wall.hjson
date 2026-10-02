@@ -1,0 +1,12 @@
+type: Wall
+name: Lab Wall
+description: "Reinforced with lab crystals. Stronger than copper walls of the same tier."
+size: 2
+health: 1600
+armor: 2
+requirements: [
+  crystal/8
+  copper/12
+]
+category: defense
+buildCostMultiplier: 0.8

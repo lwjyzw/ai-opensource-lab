@@ -1,0 +1,7 @@
+name: "My Lab Java Mod"
+author: "Could_Mud"
+main: "mylab.MyLabJavaMod"
+description: "ai-opensource-lab Level-2 mod: a self-repairing wall (custom Java block behavior)."
+version: 1.0.0
+minGameVersion: 160.3
+java: true

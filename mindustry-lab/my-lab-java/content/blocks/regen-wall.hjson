@@ -1,0 +1,10 @@
+type: mylab.RegenWall
+name: Regen Wall
+description: "Slowly self-repairs over time. Level-2 java mod from ai-opensource-lab."
+size: 2
+health: 900
+requirements: [
+  copper/12
+  titanium/8
+]
+category: defense

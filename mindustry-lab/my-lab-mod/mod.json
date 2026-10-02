@@ -1,0 +1,5 @@
+name: My Lab Mod
+author: Could_Mud
+description: "ai-opensource-lab 的第一个 Mindustry 内容 Mod——纯 JSON/HJSON，零 Java 代码。新增一种物品（实验室晶体）和一种方块（实验室护墙）。"
+version: 1.0.1
+minGameVersion: 146
