@@ -104,3 +104,35 @@ hdc shell aa start -a EntryAbility -b com.echo.music
 - ✅ play start → url ok → state: initialized → prepared → **playing**
 - ✅ 树洞发帖 → force-stop 重启 → 帖子仍在（服务端 JSON 落盘）
 - ✅ 点赞 128 → ❤️129（状态翻转 + 计数更新）
+
+
+## 七、借鉴 Mineradio-Android 的功能增强（二开对二开）
+
+从作者自己的 [Mineradio-Android](https://github.com/lwjyzw/Mineradio-Android)
+（Electron 音乐播放器的 Android 完整移植版）借鉴三个成熟模式并鸿蒙化：
+
+### 1. 全局音频播放服务（AudioPlayer.ets）
+Mineradio 的全局播放器+队列模式：模块级单例 AVPlayer + 队列 + 状态广播。
+歌单页/搜索页/本地页共用一个播放器实例，`completed` 状态自动切下一首，
+页面通过 subscribe/unsubscribe 订阅播放状态刷新 UI。
+
+### 2. 搜索页（SearchPage.ets）
+`/search` → `/cloudsearch` 双接口回退（网易云对归档版 API 的搜索接口
+间歇性 502 限流），真实结果（Beyond《海阔天空》全版本实测），
+点击即用全局服务播放。
+
+### 3. 持久化本地曲库（LocalPage.ets）
+照抄 Mineradio Android 的方案：系统 AudioViewPicker 导入
+MP3/FLAC/WAV/OGG/M4A/AAC/Opus → **复制进应用沙箱 filesDir/local/**
+（不依赖会失效的临时 uri）→ preferences 持久化曲库列表 →
+AVPlayer fdSrc 播放本地文件 → 支持删除与播放全部。
+
+### 踩坑补充
+
+- Git Bash 里 `export MSYS_NO_PATHCONV=1` 之后，所有传给 Windows 程序的
+  路径参数必须用 `D:\...` 反斜杠风格，否则 hvigorw.js 会被拼成
+  `D:\d\Program Files\...` 直接 MODULE_NOT_FOUND（这个坑让三次构建
+  静默装了旧包）
+- uitest 点击坐标来自 dumpLayout 的 bounds 中心；**键盘弹出会盖住
+  下半屏节点**，先 Back 收键盘再定位
+- Emoji 图标（🎵❤️）在 ArkTS Text 里开箱即用，做轻量 UI 够用
